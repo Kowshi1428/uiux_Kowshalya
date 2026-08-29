@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kowshalya P — UI/UX Designer</title>
+<meta name="description" content="Kowshalya P — UI/UX Designer fresher. Figma prototyping, bilingual UX writing, and front-end-aware interface design.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0B12;
+    --panel:#151520;
+    --panel-2:#1B1B29;
+    --line:#26263A;
+    --ink:#F5F3FF;
+    --muted:#A1A1B5;
+    --accent:#A78BFA;
+    --accent-2:#C4B5FD;
+    --accent-ink:#160F2E;
+    --highlight:#F0ABFC;
+    font-size:16px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+  ::selection{background:var(--highlight); color:#1A0A1E;}
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent-2);
+    outline-offset:3px;
+  }
+
+  /* ---- Nav ---- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,11,18,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px; max-width:1080px; margin:0 auto;
+  }
+  .brand{
+    font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:18px;
+    display:flex; align-items:center; gap:10px; text-decoration:none;
+  }
+  .brand .dot{width:9px; height:9px; background:var(--accent); border-radius:50%; flex:none;}
+  .nav-links{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
+  .nav-links a{
+    text-decoration:none; color:var(--muted); font-size:13px;
+    font-family:'IBM Plex Mono', monospace; letter-spacing:0.03em;
+    padding:6px 2px; border-bottom:1px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .nav-links a:hover{color:var(--ink); border-color:var(--accent);}
+  .nav-cta{
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    color:var(--accent-ink); background:var(--accent);
+    padding:9px 16px; border-radius:20px; text-decoration:none;
+    white-space:nowrap;
+  }
+  @media (max-width:760px){
+    .nav-links{display:none;}
+    .nav-cta{padding:8px 12px; font-size:12px;}
+  }
+
+  /* ---- Hero ---- */
+  .hero{
+    padding:84px 32px 0;
+    max-width:1080px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 220px; gap:48px; align-items:center;
+  }
+  .hero-photo{
+    width:220px; height:220px; border-radius:50%;
+    background:linear-gradient(160deg, var(--panel-2), var(--panel));
+    border:1px solid var(--line);
+    padding:8px;
+    justify-self:center;
+    position:relative;
+  }
+  .hero-photo::before{
+    content:""; position:absolute; inset:-6px; border-radius:50%;
+    border:1px solid var(--accent); opacity:0.35;
+  }
+  .hero-photo img{
+    width:100%; height:100%; border-radius:50%; object-fit:cover; display:block;
+  }
+  .board-label{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.12em;
+    color:var(--accent-2); text-transform:uppercase;
+    display:flex; align-items:center; gap:10px; margin-bottom:20px;
+  }
+  .board-label::before{content:""; width:22px; height:1px; background:var(--accent);}
+  .flap-row{overflow:hidden;}
+  .flap-title{
+    font-size:clamp(38px, 6vw, 68px);
+    font-weight:700;
+    line-height:1.05;
+    display:flex; flex-wrap:wrap;
+  }
+  .flap-title span.flap{
+    display:inline-block;
+    animation:flapIn 0.6s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes flapIn{
+    0%{transform:translateY(-60%); opacity:0;}
+    60%{transform:translateY(4%); opacity:1;}
+    100%{transform:translateY(0); opacity:1;}
+  }
+  .role-line{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:clamp(13px,1.6vw,16px);
+    color:var(--muted);
+    margin-top:18px;
+    display:flex; flex-wrap:wrap; gap:10px 14px; align-items:center;
+  }
+  .role-line .sep{color:var(--accent);}
+  .hero-lede{
+    max-width:600px; margin-top:22px; font-size:16px; color:var(--muted);
+  }
+  .hero-lede strong{color:var(--ink); font-weight:500;}
+  .hero-cta{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    padding:13px 22px; border-radius:24px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .btn-ghost{border:1px solid var(--line); color:var(--ink); background:var(--panel);}
+  .btn-ghost:hover{border-color:var(--accent);}
+  @media (max-width:720px){
+    .hero{grid-template-columns:1fr; text-align:left;}
+    .hero-photo{width:140px; height:140px; justify-self:start;}
+  }
+
+  /* ---- Ticker ---- */
+  .ticker-wrap{
+    margin-top:56px; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    overflow:hidden; background:var(--panel);
+  }
+  .ticker{
+    display:flex; white-space:nowrap; width:max-content;
+    animation:scroll 28s linear infinite;
+    padding:13px 0;
+  }
+  @media (prefers-reduced-motion: reduce){ .ticker{animation:none;} }
+  .ticker span{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--muted);
+    padding:0 26px; border-right:1px solid var(--line);
+  }
+  .ticker span b{color:var(--accent-2); font-weight:500;}
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+
+  /* ---- Section shell ---- */
+  section{padding:88px 0;}
+  section.tight{padding:68px 0;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.1em;
+    color:var(--accent-2); background:rgba(167,139,250,0.12);
+    padding:5px 10px; border-radius:20px; margin-bottom:18px; text-transform:uppercase;
+    border:1px solid rgba(167,139,250,0.25);
+  }
+  .sec-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:40px; flex-wrap:wrap;}
+  .sec-head h2{font-size:clamp(24px,3.2vw,32px);}
+  .sec-head p{color:var(--muted); max-width:420px; font-size:15px; margin-top:8px;}
+
+  /* ---- Profile ---- */
+  .profile-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:start;}
+  .profile-grid p{font-size:16px; color:var(--muted);}
+  .profile-grid p strong{color:var(--ink); font-weight:500;}
+  .stat-list{display:grid; gap:16px;}
+  .stat{
+    border:1px solid var(--line); border-radius:12px; padding:16px 18px;
+    background:var(--panel);
+  }
+  .stat .n{font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:600; color:var(--accent-2);}
+  .stat .l{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted); margin-top:4px;}
+  @media (max-width:760px){ .profile-grid{grid-template-columns:1fr;} }
+
+  /* ---- Case studies ---- */
+  .case-list{display:grid; gap:20px;}
+  .case{
+    border:1px solid var(--line); border-radius:16px; background:var(--panel);
+    padding:32px; display:grid; grid-template-columns:96px 1fr; gap:26px;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .case:hover{border-color:var(--accent); box-shadow:0 8px 28px rgba(167,139,250,0.08);}
+  .case-code{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--accent-2);
+    border-right:1px solid var(--line); padding-right:18px;
+  }
+  .case-code .status{
+    display:block; margin-top:10px; font-size:11px; color:var(--highlight);
+    background:rgba(240,171,252,0.12); padding:3px 8px; border-radius:12px; width:fit-content;
+  }
+  .case h3{font-size:21px; margin-bottom:6px;}
+  .case .meta{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted); margin-bottom:14px;}
+  .case p{color:var(--muted); margin:0 0 14px; font-size:15px;}
+  .case ul{margin:0 0 16px; padding-left:18px; color:var(--muted); font-size:15px;}
+  .case ul li{margin-bottom:6px;}
+  .case ul li strong{color:var(--ink); font-weight:500;}
+  .tag-row{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;}
+  .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent-2);
+    border:1px solid var(--line); background:var(--panel-2); padding:4px 10px; border-radius:12px;
+  }
+  .case-link{
+    font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--accent-2);
+    text-decoration:none; border-bottom:1px solid var(--accent);
+  }
+  @media (max-width:640px){
+    .case{grid-template-columns:1fr;}
+    .case-code{border-right:none; border-bottom:1px solid var(--line); padding-right:0; padding-bottom:14px; display:flex; align-items:center; gap:12px;}
+    .case-code .status{margin-top:0;}
+  }
+
+  /* ---- Skills ---- */
+  .skill-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;}
+  .skill-card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:24px;}
+  .skill-card h3{font-size:14px; font-family:'IBM Plex Mono',monospace; color:var(--accent-2); margin-bottom:14px; text-transform:uppercase; letter-spacing:0.04em;}
+  .skill-card ul{list-style:none; margin:0; padding:0; display:grid; gap:9px;}
+  .skill-card li{font-size:14px; color:var(--muted); padding-left:16px; position:relative;}
+  .skill-card li::before{content:"—"; position:absolute; left:0; color:var(--accent);}
+
+  /* ---- Experience timeline ---- */
+  .timeline{border-left:1px solid var(--line); padding-left:34px; display:grid; gap:40px; margin-left:6px;}
+  .t-item{position:relative;}
+  .t-item::before{
+    content:""; position:absolute; left:-40px; top:4px;
+    width:9px; height:9px; border-radius:50%; background:var(--accent);
+    box-shadow:0 0 0 4px var(--bg), 0 0 0 5px var(--line);
+  }
+  .t-item .date{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted); margin-bottom:6px;}
+  .t-item h3{font-size:18px; margin-bottom:2px;}
+  .t-item .org{color:var(--accent-2); font-size:14px; margin-bottom:12px; font-family:'IBM Plex Mono',monospace;}
+  .t-item ul{margin:0; padding-left:18px; color:var(--muted); font-size:15px;}
+  .t-item ul li{margin-bottom:6px;}
+
+  /* ---- Education / certs ---- */
+  .edu-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .edu-card{border:1px solid var(--line); border-radius:16px; padding:26px; background:var(--panel);}
+  .edu-card h3{font-size:17px; margin-bottom:6px;}
+  .edu-card .org{color:var(--muted); font-size:14px; margin-bottom:4px;}
+  .edu-card .cgpa{font-family:'IBM Plex Mono',monospace; color:var(--accent-2); font-size:14px; margin-top:10px;}
+  .cert-list{list-style:none; margin:0; padding:0; display:grid; gap:12px;}
+  .cert-list li{
+    display:flex; justify-content:space-between; gap:12px;
+    border-bottom:1px solid var(--line); padding-bottom:12px; font-size:14px; color:var(--muted);
+  }
+  .cert-list li b{color:var(--ink); font-weight:500;}
+  .cert-list li span.yr{font-family:'IBM Plex Mono',monospace; color:var(--muted); white-space:nowrap;}
+  @media (max-width:760px){ .edu-grid{grid-template-columns:1fr;} }
+
+  /* ---- Contact / footer ---- */
+  footer{border-top:1px solid var(--line); padding:80px 0 40px;}
+  .contact-board{
+    border:1px solid var(--line); border-radius:20px; background:var(--panel);
+    padding:48px; display:grid; grid-template-columns:1.2fr 1fr; gap:40px;
+  }
+  .contact-board h2{font-size:clamp(24px,3.6vw,34px); margin-bottom:14px;}
+  .contact-board p{color:var(--muted); font-size:16px; max-width:420px;}
+  .contact-list{display:grid; gap:14px; align-content:start;}
+  .contact-row{
+    display:flex; justify-content:space-between; align-items:center;
+    border-bottom:1px solid var(--line); padding-bottom:14px; text-decoration:none;
+  }
+  .contact-row .k{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted); text-transform:uppercase;}
+  .contact-row .v{font-size:15px; color:var(--ink);}
+  .contact-row:hover .v{color:var(--accent-2);}
+  .foot-bottom{
+    max-width:1080px; margin:36px auto 0; padding:0 32px;
+    display:flex; justify-content:space-between; color:var(--muted); font-size:12px;
+    font-family:'IBM Plex Mono',monospace; flex-wrap:wrap; gap:8px;
+  }
+  @media (max-width:760px){ .contact-board{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand"><span class="dot"></span>KOWSHALYA&nbsp;P</a>
+    <ul class="nav-links">
+      <li><a href="#profile">Profile</a></li>
+      <li><a href="#work">Case studies</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Contact</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="board-label">Now boarding · UI/UX design</div>
+      <div class="flap-row">
+        <h1 class="flap-title">
+          <span class="flap" style="animation-delay:.05s">Kowshalya&nbsp;</span><span class="flap" style="animation-delay:.15s">P.</span>
+        </h1>
+      </div>
+      <div class="role-line">
+        <span>UI/UX Designer — Fresher</span><span class="sep">/</span>
+        <span>UX Writing</span><span class="sep">/</span>
+        <span>Front-End Aware</span><span class="sep">/</span>
+        <span>User Research</span>
+      </div>
+      <p class="hero-lede">
+        Final-year CS undergraduate designing interfaces end to end — <strong>talking to real users, structuring the information, then building it in Figma</strong> with an eye on what a developer can actually ship. Bilingual (Tamil–English) UX writing across three internships.
+      </p>
+      <div class="hero-cta">
+        <a href="#work" class="btn btn-primary">View case studies</a>
+        <a href="mailto:kowshalya1428@gmail.com" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+     <img src="image.png" alt="Portrait of Kowshalya P">
+    </div>
+  </div>
+
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker">
+      <span>FIGMA <b>WIREFRAME → PROTOTYPE</b></span>
+      <span>BILINGUAL <b>TAMIL / ENGLISH UX WRITING</b></span>
+      <span>USER RESEARCH <b>STAKEHOLDER INTERVIEWS</b></span>
+      <span>INFORMATION ARCHITECTURE</span>
+      <span>HANDOFF-READY <b>DEV-AWARE DESIGN</b></span>
+      <span>REACT.JS CERTIFIED</span>
+      <span>FIGMA <b>WIREFRAME → PROTOTYPE</b></span>
+      <span>BILINGUAL <b>TAMIL / ENGLISH UX WRITING</b></span>
+      <span>USER RESEARCH <b>STAKEHOLDER INTERVIEWS</b></span>
+      <span>INFORMATION ARCHITECTURE</span>
+      <span>HANDOFF-READY <b>DEV-AWARE DESIGN</b></span>
+      <span>REACT.JS CERTIFIED</span>
+    </div>
+  </div>
+
+  <!-- PROFILE -->
+  <section id="profile" class="wrap">
+    <span class="eyebrow">PRF · Profile</span>
+    <div class="profile-grid">
+      <p>
+        I'm a <strong>final-year Computer Science undergraduate (CGPA 8.2)</strong> building a UI/UX practice on top of real front-end and Firebase development experience. That combination means I design with implementation in mind — I know what's realistic to build, and I write interface copy that a low-tech-literacy user can actually follow. Across three internships I've translated vague requirements into clear specs, gathered stakeholder feedback, and shipped bilingual, plain-language content. I'm currently growing a Figma case-study portfolio, one real problem at a time.
+      </p>
+      <div class="stat-list">
+        <div class="stat"><div class="n">8.2</div><div class="l">CGPA · B.E. Computer Science, 2023–2027</div></div>
+        <div class="stat"><div class="n">3</div><div class="l">Internships — dev, web content, requirements</div></div>
+        <div class="stat"><div class="n">2</div><div class="l">Languages designed for — Tamil &amp; English</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section id="work" class="wrap tight">
+    <span class="eyebrow">CST · Case studies</span>
+    <div class="sec-head">
+      <h2>Selected work</h2>
+      <p>Three projects, three different users — a social app redesign, a transit-worker support tool, and a child-safety wearable.</p>
+    </div>
+    <div class="case-list">
+
+      <article class="case">
+        <div class="case-code">01<span class="mono">/03</span><span class="status">Prototype live</span></div>
+        <div>
+          <h3>MY INSTA — Instagram UI redesign</h3>
+          <div class="meta">Personal concept project · Figma</div>
+          <p>Rebuilt Instagram's core interface end to end — feed, profile, and navigation — as a design-concept exercise, then wired every screen into a clickable prototype to test the full flow before finalizing visuals.</p>
+          <div class="tag-row">
+            <span class="tag">Wireframing</span><span class="tag">High-fidelity UI</span><span class="tag">Prototyping</span>
+          </div>
+          <a class="case-link" href="https://www.figma.com/proto/DGFeBkTvFT9ikB90NKDUxZ/MY-INSTA?node-id=15-179&starting-point-node-id=2%3A4" target="_blank" rel="noopener">View interactive prototype →</a>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-code">02<span class="mono">/03</span><span class="status">Jan – Oct 2025</span></div>
+        <div>
+          <h3>TNSTC driver &amp; conductor support portal</h3>
+          <div class="meta">Personal project · Firebase Realtime DB</div>
+          <p>Ran informal research with bus drivers and conductors to surface real pain points on the job, then scoped and designed the tool around what they actually needed.</p>
+          <ul>
+            <li><strong>Research →</strong> stakeholder interviews with drivers &amp; conductors surfaced 4 real needs</li>
+            <li><strong>Design →</strong> a stress-relief chatbot, emergency help, complaint box, and legal-awareness section</li>
+            <li><strong>Content →</strong> bilingual Tamil-English interface with a light/dark toggle, written for low-tech-literacy users</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">User research</span><span class="tag">Bilingual UX writing</span><span class="tag">Accessibility-first</span><span class="tag">End-to-end ownership</span>
+          </div>
+          <a class="case-link" href="https://github.com/Kowshi1428/tnstc-support" target="_blank" rel="noopener">View repository →</a>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-code">03<span class="mono">/03</span><span class="status">Completed</span></div>
+        <div>
+          <h3>Child safety IoT smart watch</h3>
+          <div class="meta">Concept design &amp; user-facing content</div>
+          <p>Defined the use case from real parental-monitoring needs, then designed a low-cognitive-load dashboard that translates raw hardware data into what a non-technical parent needs to see first.</p>
+          <div class="tag-row">
+            <span class="tag">Concept design</span><span class="tag">Dashboard narrative</span><span class="tag">Content structuring</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="wrap tight">
+    <span class="eyebrow">SKL · Skills</span>
+    <div class="sec-head">
+      <h2>How I work</h2>
+      <p>Design tools, process, and the front-end grounding that keeps designs buildable.</p>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card">
+        <h3>Design tools</h3>
+        <ul>
+          <li>Figma — wireframes, low/hi-fi prototyping</li>
+          <li>Basic design systems &amp; component thinking</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>UX process</h3>
+        <ul>
+          <li>User pain-point identification</li>
+          <li>Information architecture</li>
+          <li>Bilingual UX &amp; microcopy writing</li>
+          <li>Usability-first content structuring</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Research</h3>
+        <ul>
+          <li>Informal stakeholder interviews</li>
+          <li>Requirement gathering</li>
+          <li>Gap identification</li>
+          <li>Feedback → design decisions</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Handoff-ready</h3>
+        <ul>
+          <li>Real front-end &amp; Firebase dev experience</li>
+          <li>Designs developers can actually build</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Tools</h3>
+        <ul>
+          <li>Excel, Word, PowerPoint</li>
+          <li>Git / GitHub</li>
+          <li>Power BI — in progress</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="wrap tight">
+    <span class="eyebrow">EXP · Experience</span>
+    <div class="sec-head">
+      <h2>Experience</h2>
+      <p>Where the developer's-eye view of design comes from.</p>
+    </div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="date">FEB 2026 – APR 2026</div>
+        <h3>Full Stack Web Developer Intern</h3>
+        <div class="org">SG Technologie · Remote</div>
+        <ul>
+          <li>Worked directly with the Founder/MD to translate product requirements into clear documentation used across multiple client projects — the same requirement-to-spec thinking UX design relies on.</li>
+          <li>Gathered user and stakeholder feedback and communicated progress clearly; rated commendable by leadership.</li>
+        </ul>
+      </div>
+      <div class="t-item">
+        <div class="date">2024</div>
+        <h3>Website Development Intern</h3>
+        <div class="org">Autosec Nextgen Pvt Ltd · Madurai</div>
+        <ul>
+          <li>Coordinated directly with clients to understand their expectations and wrote/delivered on-brief web page content — early practice in matching design and content to a real audience.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="wrap tight">
+    <span class="eyebrow">EDU · Education &amp; recognition</span>
+    <div class="sec-head">
+      <h2>Education &amp; certifications</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <h3>B.E. Computer Science &amp; Engineering</h3>
+        <div class="org">Kamaraj College of Engineering and Technology, Virudhunagar</div>
+        <div class="org">2023 – 2027</div>
+        <div class="cgpa">CGPA 8.2 · up to 5th semester</div>
+      </div>
+      <ul class="cert-list">
+        <li><b>TCS iON NQT</b> — scored 77.84%<span class="yr">2025/26</span></li>
+        <li><b>React.js Certified</b><span class="yr">2025</span></li>
+        <li><b>Client Server Programming Certified</b><span class="yr">2024</span></li>
+        <li><b>AI Fundamentals</b> — YBI Foundation Internship<span class="yr">2024</span></li>
+        <li><b>Contributor Award &amp; Achievers Day Award</b> — Kamaraj College<span class="yr"></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <footer id="contact" class="wrap">
+    <div class="contact-board">
+      <div>
+        <span class="eyebrow">CTC · Get in touch</span>
+        <h2>Let's build something<br>people can actually use.</h2>
+        <p>Open to UI/UX design internships and entry-level roles — remote or Tamil Nadu based. I reply within a day.</p>
+      </div>
+      <div class="contact-list">
+        <a class="contact-row" href="mailto:kowshalya1428@gmail.com">
+          <span class="k">Email</span><span class="v">kowshalya1428@gmail.com</span>
+        </a>
+        <a class="contact-row" href="tel:+918344678760">
+          <span class="k">Phone</span><span class="v">+91 83446 78760</span>
+        </a>
+        <div class="contact-row">
+          <span class="k">Location</span><span class="v">Virudhunagar, Tamil Nadu</span>
+        </div>
+        <a class="contact-row" href="https://www.linkedin.com/in/kowshi-p-14oct/" target="_blank" rel="noopener">
+          <span class="k">LinkedIn</span><span class="v">/in/kowshi-p-14oct →</span>
+        </a>
+        <a class="contact-row" href="https://github.com/Kowshi1428" target="_blank" rel="noopener">
+          <span class="k">GitHub</span><span class="v">/Kowshi1428 →</span>
+        </a>
+        <a class="contact-row" href="https://www.figma.com/@kowshalya" target="_blank" rel="noopener">
+          <span class="k">Figma</span><span class="v">@kowshalya →</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="foot-bottom">
+    <span>© 2026 Kowshalya P</span>
+    <span>Designed as a departure board — every project, a route worth taking.</span>
+  </div>
+
+</main>
+
+</body>
+</html>
